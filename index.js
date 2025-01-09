@@ -41,7 +41,6 @@ class Book {
   get author() {
     return this._author;
   }
-  //--------------
 
   set title(newValue) {
     if (typeof newValue !== "string") {
@@ -56,7 +55,6 @@ class Book {
   get title() {
     return this._title;
   }
-  //---------------
 
   set year(newValue) {
     if (newValue === " ") {
@@ -71,7 +69,6 @@ class Book {
   get year() {
     return this._year;
   }
-  //-----------------
 
   set quantityPages(newValue) {
     if (newValue === " ") {
@@ -89,7 +86,6 @@ class Book {
   get quantityPages() {
     return this._quantityPages;
   }
-  //-------------------
 
   set shelfNumber(newValue) {
     if (newValue === " ") {
@@ -107,7 +103,6 @@ class Book {
   get shelfNumber() {
     return this._shelfNumber;
   }
-  //-------------------
 
   set idUser(newValue) {
     if (newValue === " ") {
@@ -125,7 +120,6 @@ class Book {
   get idUser() {
     return this._idUser;
   }
-  //-------------------
 
   isVacant() {
     if (this.shelfNumber > 0 && this.idUser === null) {
@@ -139,7 +133,9 @@ class Book {
     if (this.shelfNumber === 0 && this.idUser > 0) {
       console.log(`User ${this.idUser} took the book ${this.title}`);
     } else {
-      console.log(`The book ${this.title} located on the ${this.shelfNumber} shelf`);
+      console.log(
+        `The book ${this.title} located on the ${this.shelfNumber} shelf`
+      );
     }
   }
 }
@@ -147,3 +143,145 @@ class Book {
 const book1 = new Book("Joanne Rowling", "Harry Potter", 2020, 350, 33, null);
 book1.isVacant();
 book1.getRent();
+
+class User {
+  constructor(id, firstName, lastName, address) {
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.address = address;
+  }
+
+  set id(newValue) {
+    if (newValue === " ") {
+      throw new RangeError("Id number cannot be empty.");
+    }
+    if (typeof newValue !== "number") {
+      throw new TypeError("Id must be a number.");
+    }
+    if (newValue <= 0) {
+      throw new RangeError("Id must be more 0.");
+    }
+    this._id = newValue;
+  }
+
+  get id() {
+    return this._id;
+  }
+
+  set firstName(newValue) {
+    if (typeof newValue !== "string") {
+      throw new TypeError("First name must be a string.");
+    }
+    if (newValue === " ") {
+      throw new RangeError("First name cannot be empty.");
+    }
+    this._firstName = newValue;
+  }
+
+  get firstName() {
+    return this._firstName;
+  }
+
+  set lastName(newValue) {
+    if (typeof newValue !== "string") {
+      throw new TypeError("Last name must be a string.");
+    }
+    if (newValue === " ") {
+      throw new RangeError("Last name cannot be empty.");
+    }
+    this._lastName = newValue;
+  }
+
+  get lastName() {
+    return this._lastName;
+  }
+
+  set address(newValue) {
+    if (typeof newValue !== "string") {
+      throw new TypeError("Address must be a string.");
+    }
+    if (newValue === " ") {
+      throw new RangeError("Address cannot be empty.");
+    }
+    this._address = newValue;
+  }
+
+  get address() {
+    return this._address;
+  }
+}
+const user1 = new User(
+  44,
+  "Victor",
+  "Rudenko",
+  "Zaporizhzhia city, Stalevariv st., building 44, apt. 67"
+);
+console.log(user1);
+
+//------------------------------------------------------------------------------------------------
+/*2. Створити клас для опису абстрактної тварини 
+і два класи для тварин Тигр та Вовк, які його розширюють. 
+Батьківський клас має реалізувати методи hunting та growl 
+(робота методів - вивести в консоль рядок типу “зараз дожену здобич” та “грррррр”),
+ а тигр та вовк мають реалізувати однойменні методи по-своєму 
+ (наприклад, виводити “тигр з’їсть тебе”). 
+ Створити декілька екземплярів класу Тигр і Вовк і перевірити, 
+ чий метод викликається - класу-дитини або абстрактного батьківського класу.
+ */
+
+class Animal {
+  constructor(nickname) {
+    this.nickname = nickname;
+  }
+
+  hunting() {}
+
+  growl() {}
+}
+
+class Tiger extends Animal {
+  constructor(nickname) {
+    super(nickname);
+  }
+  hunting() {
+    console.log(`${this.nickname} will eat you`);
+  }
+
+  growl() {
+    console.log(`${this.nickname} grrrrrrr`);
+  }
+}
+
+class Wolf extends Animal {
+  constructor(nickname) {
+    super(nickname);
+  }
+  hunting() {
+    console.log(`${this.nickname} will drive its prey`);
+  }
+
+  growl() {
+    console.log(`${this.nickname} woooooooo`);
+  }
+}
+
+const tigr1 = new Tiger("Rodger");
+console.log(tigr1);
+tigr1.hunting();
+tigr1.growl();
+
+const tigr2 = new Tiger("Ariana");
+console.log(tigr2);
+tigr2.hunting();
+tigr2.growl();
+
+const wolf1 = new Wolf("Alfa");
+console.log(wolf1);
+wolf1.hunting();
+wolf1.growl();
+
+const wolf2 = new Wolf("Mona");
+console.log(wolf2);
+wolf2.hunting();
+wolf2.growl();
