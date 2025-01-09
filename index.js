@@ -235,9 +235,13 @@ class Animal {
     this.nickname = nickname;
   }
 
-  hunting() {}
+  hunting() {
+    console.log("will eat you");
+  }
 
-  growl() {}
+  growl() {
+    console.log("grrrrrrr");
+  }
 }
 
 class Tiger extends Animal {
